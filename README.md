@@ -1,6 +1,7 @@
 # flutter_complete_guide
 
-A new Flutter application.
+A Complete Flutter Guide.
+![Complete Flutter Guide](https://github.com/skalva404/flutter_complete_guide/blob/main/screenshots/demo-app.jpeg)
 
 ## Getting Started
 
