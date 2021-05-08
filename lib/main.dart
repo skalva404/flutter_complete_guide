@@ -5,6 +5,7 @@ import 'components/Result.dart';
 import 'components/AppBar.dart';
 import 'components/MyDrawer.dart';
 import './theme/Style.dart';
+import './Constants.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,43 +16,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   var _ctr = 0;
   var _totalScore = 0;
   var _selectedDestination = 0;
 
-  final List<Map<String, Object>> questions = const [
-    {
-      'question': 'What\'s you favorite color ?',
-      'answers': [
-        {'text': 'red', 'score': 15},
-        {'text': 'green', 'score': 8},
-        {'text': 'black', 'score': 10},
-        {'text': 'white', 'score': 3},
-      ]
-    },
-    {
-      'question': 'What\'s your favorite animal ?',
-      'answers': [
-        {'text': 'dog', 'score': 15},
-        {'text': 'cat', 'score': 8},
-        {'text': 'rabbit', 'score': 10},
-        {'text': 'reptile', 'score': 3},
-      ]
-    },
-    {
-      'question': 'What\'s your favorite dish ?',
-      'answers': [
-        {'text': 'pizza', 'score': 15},
-        {'text': 'pasta', 'score': 8},
-        {'text': 'biriyani', 'score': 10},
-        {'text': 'burger', 'score': 3},
-      ]
-    }
-  ];
-
   void _resetQuiz() {
     setState(() {
+      _selectedDestination = 0;
       _totalScore = 0;
       _ctr = 0;
     });
@@ -59,8 +30,10 @@ class _MyAppState extends State<MyApp> {
 
   void _answerQuestion(int score) {
     setState(() {
+      _selectedDestination = 0;
       _totalScore += score;
       _ctr++;
+      _selectedDestination = _ctr;
       // _ctr = (_ctr + 1) > questions.length - 1 ? 0 : (_ctr + 1);
     });
   }
@@ -81,10 +54,12 @@ class _MyAppState extends State<MyApp> {
         drawer: Drawer(
           child: MyDrawer(_selectDestination),
         ),
-        body: _ctr <= questions.length - 1
-            ? QnA(questions[_ctr]['question'], questions[_ctr]['answers'],
-                _answerQuestion)
-            : Result(_totalScore, _resetQuiz),
+        body:
+            // int index = 1;
+            _ctr <= QUESTIONS.length - 1
+                ? QnA(QUESTIONS[_selectedDestination]['question'], QUESTIONS[_selectedDestination]['answers'],
+                    _answerQuestion)
+                : Result(_totalScore, _resetQuiz),
       ),
     );
   }

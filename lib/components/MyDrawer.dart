@@ -52,7 +52,7 @@ class MyDrawer extends StatelessWidget {
               color: Colors.red,
             ),
             onTap: () {
-              _selectDestination(1);
+              _selectDestination(0);
               Navigator.of(context).pop();
             },
           ),
@@ -64,6 +64,7 @@ class MyDrawer extends StatelessWidget {
             ),
             trailing: Icon(Icons.zoom_in_sharp, color: Colors.green),
             onTap: () {
+              _selectDestination(1);
               Navigator.pop(context);
             },
           ),
@@ -75,6 +76,7 @@ class MyDrawer extends StatelessWidget {
             ),
             trailing: Icon(Icons.zoom_in_sharp, color: Colors.green),
             onTap: () {
+              _selectDestination(2);
               Navigator.pop(context);
             },
           ),
