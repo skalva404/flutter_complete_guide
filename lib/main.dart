@@ -16,31 +16,28 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var _ctr = 0;
+  var _optionSelected = 0;
+  var _questionIndex = 0;
   var _totalScore = 0;
-  var _selectedDestination = 0;
 
   void _resetQuiz() {
     setState(() {
-      _selectedDestination = 0;
       _totalScore = 0;
-      _ctr = 0;
+      _optionSelected = 0;
+      _questionIndex = 0;
     });
   }
 
-  void _answerQuestion(int score) {
+  void _scoreAnswer(int optionSelected, int score) {
     setState(() {
-      _selectedDestination = 0;
       _totalScore += score;
-      _ctr++;
-      _selectedDestination = _ctr;
-      // _ctr = (_ctr + 1) > questions.length - 1 ? 0 : (_ctr + 1);
+      _optionSelected = optionSelected;
     });
   }
 
-  void _selectDestination(int index) {
+  void _moveToNextQuestion(int index) {
     setState(() {
-      _selectedDestination = index;
+      _questionIndex = index;
     });
   }
 
@@ -52,14 +49,24 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: MyAppBar().build(),
         drawer: Drawer(
-          child: MyDrawer(_selectDestination),
+          child: MyDrawer(_moveToNextQuestion),
         ),
-        body:
-            // int index = 1;
-            _ctr <= QUESTIONS.length - 1
-                ? QnA(QUESTIONS[_selectedDestination]['question'], QUESTIONS[_selectedDestination]['answers'],
-                    _answerQuestion)
-                : Result(_totalScore, _resetQuiz),
+        body: _questionIndex <= QUESTIONS.length - 1
+            ? QnA(
+                _optionSelected,
+                QUESTIONS[_questionIndex]['question'],
+                QUESTIONS[_questionIndex]['answers'],
+                _scoreAnswer,
+                _moveToNextQuestion,
+                _questionIndex)
+            : Result(_totalScore, _resetQuiz),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _resetQuiz();
+          },
+          child: const Icon(Icons.refresh),
+          backgroundColor: Colors.green,
+        ),
       ),
     );
   }

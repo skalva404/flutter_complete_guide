@@ -19,7 +19,7 @@ class Result extends StatelessWidget {
     } else if (_totalScore <= 45) {
       retStrinig = 'You are best  ...!';
     }
-    return retStrinig;
+    return "Your total score is : " + _totalScore.toString();
   }
 
   @override
@@ -34,7 +34,6 @@ class Result extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          TextButton(onPressed: _resetQuiz, child: Text("Restart Quiz ... !"))
         ],
       ),
     );
