@@ -1,8 +1,8 @@
 # flutter_complete_guide
 
 A Complete Flutter Guide.
-![Complete Flutter Guide](https://github.com/skalva404/flutter_complete_guide/blob/main/screenshots/demo-app.jpeg)
-
+![Complete Flutter Guide](https://github.com/skalva404/flutter_complete_guide/blob/main/screenshots/demo-app-1.jpeg) | ![Complete Flutter Guide](https://github.com/skalva404/flutter_complete_guide/blob/main/screenshots/demo-app-2.jpeg)
+-------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------
 ## Getting Started
 
 This project is a starting point for a Flutter application.
