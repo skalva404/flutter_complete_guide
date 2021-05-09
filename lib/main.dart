@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/model/Scores.dart';
 
 import 'components/QnA.dart';
 import 'components/Result.dart';
@@ -16,28 +17,25 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var _optionSelected = 0;
   var _questionIndex = 0;
-  var _totalScore = 0;
+  Scores _scores = Scores.init();
 
   void _resetQuiz() {
     setState(() {
-      _totalScore = 0;
-      _optionSelected = 0;
+      _scores = Scores.init();
       _questionIndex = 0;
     });
   }
 
-  void _scoreAnswer(int optionSelected, int score) {
+  void _moveToNextQuestion(int questionIndex) {
     setState(() {
-      _totalScore += score;
-      _optionSelected = optionSelected;
+      _questionIndex = questionIndex;
     });
   }
 
-  void _moveToNextQuestion(int index) {
+  void _scoreAnswer(int questionIndex, int optionSelected, int score) {
     setState(() {
-      _questionIndex = index;
+      _scores.setScore(questionIndex, Answer(score, optionSelected));
     });
   }
 
@@ -53,13 +51,13 @@ class _MyAppState extends State<MyApp> {
         ),
         body: _questionIndex <= QUESTIONS.length - 1
             ? QnA(
-                _optionSelected,
+                this._scores,
                 QUESTIONS[_questionIndex]['question'],
                 QUESTIONS[_questionIndex]['answers'],
                 _scoreAnswer,
                 _moveToNextQuestion,
                 _questionIndex)
-            : Result(_totalScore, _resetQuiz),
+            : Result(_scores.getTotalScore(), _resetQuiz),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             _resetQuiz();

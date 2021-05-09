@@ -3,19 +3,20 @@ import 'package:flutter/material.dart';
 import 'Questions.dart';
 import 'RadioAnswer.dart';
 import 'Answer.dart';
+import '../model/Scores.dart';
 
 class QnA extends StatelessWidget {
-  final optionSelected;
+  final Scores scores;
   final Object answers;
   final String question;
+  final int questionIndex;
   final Function scoreAnswer;
   final Function moveToNextQuestion;
-  final int stepIndex;
 
   static int _index = 0;
 
-  QnA(this.optionSelected, this.question, this.answers, this.scoreAnswer,
-      this.moveToNextQuestion, this.stepIndex);
+  QnA(this.scores, this.question, this.answers, this.scoreAnswer,
+      this.moveToNextQuestion, this.questionIndex);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class QnA extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Question(question),
-          RadioAnswer(optionSelected, answers, scoreAnswer),
+          RadioAnswer(questionIndex, scores, answers, scoreAnswer),
           // ...(answers as List<Map<String, Object>>).map((answer) {
           //   return Answer(
           //       answer['text'], () => answerQuestion(answer['score']));
@@ -32,7 +33,7 @@ class QnA extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(75.0, 15.0, 1.0, 1.0),
             child: Stepper(
               type: StepperType.vertical,
-              currentStep: stepIndex,
+              currentStep: questionIndex,
               onStepCancel: () {
                 _index = --_index < 0 ? 0 : _index;
                 moveToNextQuestion(_index);

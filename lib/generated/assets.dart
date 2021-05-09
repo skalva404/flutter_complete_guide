@@ -2,6 +2,15 @@
 class Assets {
   Assets._();
 
-  static const String imagesElon = 'assets/images/elon.jpg';
+  static const String assetsElon = 'assets/elon.jpg';
+  static const String assetsSwiggy = 'assets/swiggy.png';
+  static const String helpBlack = 'assets/help/black.jpeg';
+  static const String helpCat = 'assets/help/cat.jpeg';
+  static const String helpDog = 'assets/help/dog.jpeg';
+  static const String helpGreen = 'assets/help/green.jpeg';
+  static const String helpRabbit = 'assets/help/rabbit.jpeg';
+  static const String helpRed = 'assets/help/red.jpeg';
+  static const String helpReptile = 'assets/help/reptile.jpeg';
+  static const String helpWhite = 'assets/help/white.jpeg';
 
 }
